@@ -1,0 +1,26 @@
+package com.emsi.Client.service;
+
+import com.emsi.Client.entites.Client;
+import com.emsi.Client.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ClientService {
+    @Autowired
+    private ClientRepository clientRepository;
+
+    public List<Client> findAll(){
+        return clientRepository.findAll();
+    }
+
+    public Client findById(int id)throws Exception{
+        return  clientRepository.findById(id).orElseThrow(()->new Exception("Invalid client ID"));
+    }
+
+    public void addClient(Client client){
+        clientRepository.save(client);
+    }
+}
